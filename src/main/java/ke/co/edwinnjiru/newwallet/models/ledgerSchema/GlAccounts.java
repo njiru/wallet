@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
 
 import java.time.LocalDateTime;
 
@@ -22,8 +24,8 @@ public class GlAccounts extends BaseEntity {
     @Column(nullable = false, length = 100)
     private String accountName;
 
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "acc_generator")
-    @SequenceGenerator(name = "acc_generator", initialValue = 1000000000, allocationSize = 1)
+    @Generated()
+    @Column(columnDefinition = "serial", updatable = false)
     private Long accountNumber;
 
     @Column(nullable = false, columnDefinition = "decimal(10,2) default '0.00'")

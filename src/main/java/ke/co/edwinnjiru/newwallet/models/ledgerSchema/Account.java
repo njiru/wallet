@@ -10,9 +10,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import java.util.HashSet;
-import java.util.Set;
-
 @Entity
 @Data
 @SuperBuilder
@@ -23,16 +20,16 @@ import java.util.Set;
 public class Account extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 20, columnDefinition = "varchar(20) default 'active'")
+    @Column(nullable = false, length = 20, insertable = false, columnDefinition = "varchar(20) default 'active'")
     private Status accountStatus;
 
-    @Column(nullable = false, unique = true, updatable = false)
-    private Long accountNumber;
+    @Column(nullable = false, unique = true, updatable = false, length = 20)
+    private String accountNumber;
 
-    @Column(nullable = false, columnDefinition = "decimal(10,2) default '0.00'")
+    @Column(nullable = false, insertable = false, columnDefinition = "decimal(10,2) default '0.00'")
     private Double actualBalance;
 
-    @Column(nullable = false, columnDefinition = "decimal(10,2) default '0.00'")
+    @Column(nullable = false, insertable = false, columnDefinition = "decimal(10,2) default '0.00'")
     private Double availableBalance;
 
     @ManyToOne(fetch = FetchType.LAZY)
